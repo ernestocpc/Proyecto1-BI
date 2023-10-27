@@ -1,19 +1,7 @@
-from joblib import load
-import pandas as pd
-
 from contexto.limpieza import limpieza_texto, lista_stopwords, remover_stopwords
 from contexto.stemming import Stemmer, stem_texto
 from contexto.vectorizacion import VectorizadorFrecuencias
-
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import ComplementNB
-from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.metrics import confusion_matrix
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
-from sklearn.linear_model import SGDClassifier
-from sklearn.model_selection import GridSearchCV
 
 """
 Limpieza de datos. La funcion limpieza_texto hace lo siguiente:
@@ -24,7 +12,6 @@ Limpieza de datos. La funcion limpieza_texto hace lo siguiente:
 
 Luego, se remueven las stopwords del texto. Para esto, se utiliza la función remover_stopwords.
 """
-
 class TextTransformer(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):

@@ -5,9 +5,6 @@ from joblib import load
 from DataModel import DataModel
 from PredictionModel import Model
 
-import Pipeline
-from Pipeline import TextTransformer
-
 app = FastAPI()
  
 @app.get("/")
@@ -20,5 +17,4 @@ def make_predictions(dataModel: DataModel):
     df = pd.DataFrame([texto], columns=['Textos_espanol'])
     model = load("modeloCNB.joblib")
     result = model.predict(df['Textos_espanol'])[0]
-    print(result)
-    return result
+    return int(result)
