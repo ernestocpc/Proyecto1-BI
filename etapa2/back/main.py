@@ -3,7 +3,6 @@ from typing import Optional
 from fastapi import FastAPI
 from joblib import load
 from DataModel import DataModel
-from PredictionModel import Model
 
 app = FastAPI()
  
