@@ -9,7 +9,7 @@ import "./classifier.css"
 
 
 function Classifier() {
-    const [formValues, setFormValues] = useState({ text: "", algorithm: "" })
+    const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" })
     const [label, setLabel] = useState(-1)
     const [chartData, setChartData] = useState([
         { category: 'ODS 6', probability: 0 },
@@ -104,7 +104,7 @@ function Classifier() {
                 <Form.Group>
                     <h3>Tipo de clasificador:</h3>
                     <Form.Select value={formValues.algorithm} onChange={handleSelectChange}>
-                        <option value='cnc'>Complement Naive Bayes</option>
+                        <option value='cnb'>Complement Naive Bayes</option>
                         <option value='sdg'>SVM</option>
                         <option value='rfc'>Random Forest</option>
                     </Form.Select>
