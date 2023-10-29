@@ -3,15 +3,12 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  LabelList,
-} from "recharts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import "rc-tooltip/assets/bootstrap.css";
+import Tooltip from "rc-tooltip";
+
+import { BarChart, Bar, XAxis, YAxis, Legend, LabelList } from "recharts";
 import "./classifier.css";
 
 function Classifier() {
@@ -139,6 +136,7 @@ function Classifier() {
       return "bg-16 rounded-3 text-white";
     }
   };
+  const renderTooltip = <span>Estos representan 3 algoritmos different disponibles para realizar la clasificacion. Se recomienda usar Naive Bayes que tiene la mayor precision.</span>;
 
   return (
     <>
@@ -157,7 +155,12 @@ function Classifier() {
           />
         </Form.Group>
         <Form.Group>
-          <h3>Tipo de clasificador:</h3>
+          <div className="form-group-header">
+            <h3>Tipo de clasificador:</h3>
+            <Tooltip placement="right" overlay={renderTooltip}>
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </Tooltip>
+          </div>
           <Form.Select
             value={formValues.algorithm}
             onChange={handleSelectChange}
@@ -172,6 +175,7 @@ function Classifier() {
           <Button
             style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
             onClick={sendText}
+            
           >
             Clasificar
           </Button>
@@ -191,7 +195,7 @@ function Classifier() {
             <BarChart width={500} height={300} data={chartData}>
               <XAxis dataKey="category" />
               <YAxis tickFormatter={formatPercentage} />
-              <Tooltip />
+
               <Legend />
               <Bar dataKey="probability" fill="#8884d8">
                 <LabelList
