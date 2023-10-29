@@ -10,6 +10,13 @@ import "./main.css"
 function Main() {
     return (
         <div>
+            <Container className='GContainer'>
+                <Row>
+                    
+                    <Col className='text-center'><img className='img-fluid' alt='Logo de la universidad de los andes' src='./media/u_andes.png'/></Col>
+                    <Col classNanem='text center'><img className='img-fluid' alt='logo de la UNFPA' src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/UNFPA_logo.svg/2560px-UNFPA_logo.svg.png'/></Col>
+                </Row>
+            </Container>
             <Container className='GContainer bg-primary text-white rounded-3'>
                 <Row>
                     <h1>Clasificador de textos - UNFPA</h1>

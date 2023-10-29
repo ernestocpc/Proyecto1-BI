@@ -9,7 +9,7 @@ import "./classifier.css"
 
 
 function Classifier() {
-    const [formValues, setFormValues] = useState({ text: "" })
+    const [formValues, setFormValues] = useState({ text: "", algorithm: "" })
     const [label, setLabel] = useState(-1)
     const [chartData, setChartData] = useState([
         { category: 'ODS 6', probability: 0 },
@@ -41,10 +41,14 @@ function Classifier() {
         setFormValues({ ...formValues, text: e.target.value })
     }
 
+    const handleSelectChange = (e) => {
+        setFormValues({...formValues, algorithm: e.target.value}) 
+    } 
+
     const sendText = () => {
         if (formValues.text.length !== 0) {
             handlePost()
-            console.log("Se realiza el envio :D")
+            console.log(formValues)
         } else {
             alert("No ha ingresado ningun texto!!!")
         }
@@ -97,6 +101,15 @@ function Classifier() {
                 <Form.Group style={{ paddingTop: '10px', paddingBottom: '10px' }}>
                     <Form.Control as="textarea" onChange={handleTextChange} value={formValues.text} rows={8} />
                 </Form.Group>
+                <Form.Group>
+                    <h3>Tipo de clasificador:</h3>
+                    <Form.Select value={formValues.algorithm} onChange={handleSelectChange}>
+                        <option value='cnc'>Complement Naive Bayes</option>
+                        <option value='sdg'>SVM</option>
+                        <option value='rfc'>Random Forest</option>
+                    </Form.Select>
+                </Form.Group>
+                <p></p>
                 <div className='text-center'>
                 <Button variant='primary' onClick={sendText} >Clasificar</Button>
                 </div>
