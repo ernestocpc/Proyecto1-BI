@@ -6,6 +6,7 @@ from joblib import load
 from DataModel import DataModel
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
+from math import exp
 
 logging.basicConfig(filename='log.csv', level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -46,7 +47,16 @@ def make_predictions(dataModel: DataModel):
 
     df = pd.DataFrame([texto], columns=['Textos_espanol'])
     result = model.predict(df['Textos_espanol'])[0]
-    probabilidades = model.predict_proba(df['Textos_espanol'])[0] # Probabilidades: [6, 7, 16]
+
+    probabilidades = []
+    if algoritmo == 'sdg':
+        scores = []
+        scores = model.decision_function(df['Textos_espanol'])[0]
+        for score in scores:
+            probabilidad = 1 / (1 + exp(-score))
+            probabilidades.append(probabilidad) # Probabilidades: [6, 7, 16]
+    else:
+        probabilidades = model.predict_proba(df['Textos_espanol'])[0] # Probabilidades: [6, 7, 16]
 
     jsonResultadoYProbabilidades = {
         "resultado": int(result),
