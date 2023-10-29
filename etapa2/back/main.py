@@ -70,7 +70,7 @@ def make_predictions(dataModel: DataModel):
 def get_log():
     log = []
     with open('log.csv', 'r', encoding='utf-8') as f:
-        header = f.readline()
+        f.readline()
         for line in f:
             linea = line.replace('\n', '')
             linea = linea.split(';')
