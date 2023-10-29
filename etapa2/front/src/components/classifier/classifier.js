@@ -136,7 +136,7 @@ function Classifier() {
       return "bg-16 rounded-3 text-white";
     }
   };
-  const renderTooltip = <span>Estos representan 3 algoritmos different disponibles para realizar la clasificacion. Se recomienda usar Naive Bayes que tiene la mayor precision.</span>;
+  const renderTooltip = <span>Estos representan 3 algoritmos diferentes disponibles para realizar la clasificacion. Se recomienda usar Naive Bayes que tiene la mayor precision.</span>;
 
   return (
     <>
