@@ -4,6 +4,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList } from 'recharts';
 
+import "./classifier.css"
+
 
 function Classifier() {
     const [formValues, setFormValues] = useState({ text: "" })
@@ -66,7 +68,9 @@ function Classifier() {
                 <Form.Group style={{ paddingTop: '10px', paddingBottom: '10px' }}>
                     <Form.Control as="textarea" onChange={handleTextChange} value={formValues.text} rows={8} />
                 </Form.Group>
+                <div className='text-center'>
                 <Button variant='primary' onClick={sendText} >Clasificar</Button>
+                </div>
             </Container>
             {label !== -1 && (
                 <>
@@ -74,21 +78,21 @@ function Classifier() {
                         <h2>Resultado de la clasificación</h2>
                         {returnLabel()}
                     </Container>
-                    <Container style={{ paddingTop: '10px', paddingBottom: '10px' }}>
+                    <Container style={{ paddingTop: '10px', paddingBottom: '10px'}}>
                         <h2>Gráfico de Probabilidades</h2>
-                        <BarChart width={500} height={300} data={chartData}>
-                            <XAxis dataKey="category" />
-                            <YAxis tickFormatter={formatPercentage} />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="probability" fill="#8884d8">
-                                <LabelList
-                                    dataKey="probability"
-                                    position="top"
-                                    formatter={(value) => `${(value * 100).toFixed(2)}%`}
-                                />
-                            </Bar>
-                        </BarChart>
+                            <BarChart width={500} height={300} data={chartData}>
+                                <XAxis dataKey="category" />
+                                <YAxis tickFormatter={formatPercentage} />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="probability" fill="#8884d8">
+                                    <LabelList
+                                        dataKey="probability"
+                                        position="top"
+                                        formatter={(value) => `${(value * 100).toFixed(2)}%`}
+                                    />
+                                </Bar>
+                            </BarChart>
                     </Container>
                 </>
 

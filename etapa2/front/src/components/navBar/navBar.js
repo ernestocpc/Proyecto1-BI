@@ -7,7 +7,7 @@ function Navbar() {
         <>
             <NavBar collapseOnSelect expand='lg' bg='dark' variant='dark' >
                 <Container fluid>
-                    <NavBar.Brand href='/' style={{ marginLeft: '1.5rem' }}><h1>Analizador de textos</h1></NavBar.Brand>
+                    <NavBar.Brand href='/' style={{ marginLeft: '1.5rem' }}><h1>Clasificador de textos</h1></NavBar.Brand>
                     <NavBar.Toggle aria-controls='responsive-navbar-nav' />
                     <NavBar.Collapse id='responsive-navbar-nav'>
                         <Nav className='ml-auto'>

@@ -3,10 +3,14 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 
+
+import "./main.css"
+
+
 function Main() {
     return (
         <div>
-            <Container>
+            <Container className='GContainer bg-primary text-white rounded-3'>
                 <Row>
                     <h1>Clasificador de textos - UNFPA</h1>
                 </Row>
@@ -18,7 +22,7 @@ function Main() {
                     </p>
                 </Row>
             </Container>
-            <Container>
+            <Container className='GContainer bg-secondary text-white rounded-3'>
                 <Row>
                     <h1>¿Que va a encontrar en esta aplicación?</h1>
                 </Row>
@@ -33,14 +37,14 @@ function Main() {
                     <Col>
                         <h2>Clasificador</h2>
                         <p>
-                            En esta sección puede hacer uso del modelo de clasificación.
+                            En esta sección puede hacer uso del modelo de clasificación, que le permetira automatizar el proceso de clasificación de textos.
                         </p>
                     </Col>
                 </Row>
             </Container>
             <Container>
                 <Row>
-                    <Col>
+                    <Col className='text-center'>
                         <Button variant="primary" size="lg" href='/classifier'>¡Comenzar!</Button>
                     </Col>
                 </Row>

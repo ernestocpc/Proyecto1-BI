@@ -1,14 +1,17 @@
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
+import Col from 'react-bootstrap/Col'
+
+import "./context.css"
 
 function Context(){
     return(
         <div>
-            <Container>
+            <Container className='GContainer bg-primary text-white rounded-3 '>
                 <Row>
                     <h1>¿Que es esta aplicación?</h1>
                     <p>Esta aplicación contiene un modelo de clasificación basado en aprendizaje 
-                        automático, que permite relacionar un texto con un ODS.
+                        automático, que permite relacionar un texto con un ODS. 
                     </p>
                     <p>Esta aplicación solo clasificara a un texto en tres posibles categorias:
                     </p>
@@ -18,12 +21,21 @@ function Context(){
                             <li>7. Energía Asequible y no contaminante</li>
                             <li>16. Paz, justicia e instituciones sólidas</li>
                         </ul>
+                    <p>haz click en las siguientes imagenes si quieres conocer más acerca de los objetivos de desarrollo sostenible:</p>
                     </Container>
                 </Row>
+                <Row>
+                <Col className='text-center'><a href='https://www.un.org/sustainabledevelopment/es/water-and-sanitation/'><img className='img-fluid rounded' alt='ODS 6. Agua limpia y saneamiento' src='https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-06.png?itok=GELGcmKf'/></a></Col>
+                <Col className='text-center'><a href='https://www.un.org/sustainabledevelopment/es/energy/'><img className='img-fluid rounded' alt='ODS 7. Energía asequible y no contaminante' src='https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-07.png?itok=0xptJrFs'/></a></Col>
+                <Col className='text-center'><a href='https://www.un.org/sustainabledevelopment/es/peace-justice/'><img className='img-fluid rounded' alt='ODS 16. Paz, justicia e instituciones solidas' src='https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-16.png?itok=zRRLXl8t'/></a></Col>
+                </Row>
             </Container>
-            <Container>
+            <Container className='GContainer bg-secondary text-white rounded-3'>
                 <Row>
                     <h2>¿Que es un ODS?</h2>
+                    <Col className='text-center'>
+                        <img className='img-fluid rounded-3 m-4' alt='Logo de los ODS de las naciones unidas' src='https://www.iberdrola.com/documents/20125/40855/Agenda2030_ESP_746x419.jpg/57424b56-9f4c-70ef-190b-2fee7bf39f94?t=1627884739022'/>
+                    </Col>
                     <p>
                     Los ODS (Objetivos de desarrollo sostenible), son 17 objetivos planteados 
                     por las naciones unidas. Estos están diseñados para proveer un plan para 
@@ -31,7 +43,7 @@ function Context(){
                     Estos fueron establecidos en el año 2015, y se busca que estos sean completados 
                     para el año 2030.
                     </p>
-                    <p>Para más informació puede visitar la pagina de las naciones unidas: <a href='https://www.un.org/sustainabledevelopment/es/objetivos-de-desarrollo-sostenible/'>Objetivos de desarrollo sostenible - UN</a></p>
+                    <p>Para más información puede visitar la pagina de las naciones unidas: <a href='https://www.un.org/sustainabledevelopment/es/objetivos-de-desarrollo-sostenible/'>Objetivos de desarrollo sostenible - UN</a></p>
                 </Row>
                 <Row>
                     <h2>¿Por qué son importantes?</h2>
