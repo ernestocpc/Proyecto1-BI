@@ -13,10 +13,10 @@ function Main() {
             Bienvenido al clasificador de textos - UNFPA
           </h1>
           <p className="font-italic subtitulo">
-            La siguiente aplicación se ha desarrollado en conjunto entre la
-            universidad de los Andes y El Fondo de Poblaciones de las Naciones
-            Unidas como estrategía de clasificación de texto. Con el objetivo de
-            mejorar los procesos de identificación de información textual
+            La siguiente aplicación se ha desarrollado en conjunto con la
+            Universidad de los Andes y El Fondo de Poblaciones de las Naciones
+            Unidas como estrategía de clasificación de texto. Esto, con el objetivo de
+            mejorar los procesos de identificación de información textual.
           </p>
           <Button
             className="main-button"
