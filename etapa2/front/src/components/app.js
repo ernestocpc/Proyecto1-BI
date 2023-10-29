@@ -3,7 +3,7 @@ import Navbar from "./navBar"
 
 import Main from "./main"
 import Context from './context'
-import Classifier from './classifier'
+import Classifier from './classifier/classifier'
 
 
 

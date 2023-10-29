@@ -1,8 +1,9 @@
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import Button from "react-bootstrap/Button"
 
-function Main(){
+function Main() {
     return (
         <div>
             <Container>
@@ -10,7 +11,7 @@ function Main(){
                     <h1>Clasificador de textos - UNFPA</h1>
                 </Row>
                 <Row>
-                    <p>La siguiente aplicación se ha desarrollado en conjunto entre la 
+                    <p>La siguiente aplicación se ha desarrollado en conjunto entre la
                         universidad de los Andes y El Fondo de Poblaciones de las Naciones Unidas
                         como estrategía de clasificación de texto. Con el objetivo de mejorar los
                         procesos de identificación de información textual
@@ -34,6 +35,13 @@ function Main(){
                         <p>
                             En esta sección puede hacer uso del modelo de clasificación.
                         </p>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row>
+                    <Col>
+                        <Button variant="primary" size="lg" href='/classifier'>¡Comenzar!</Button>
                     </Col>
                 </Row>
             </Container>
