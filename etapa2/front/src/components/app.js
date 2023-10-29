@@ -1,8 +1,8 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import Navbar from "./navBar"
+import Navbar from "./navBar/navBar"
 
-import Main from "./main"
-import Context from './context'
+import Main from "./main/main"
+import Context from './context/context'
 import Classifier from './classifier/classifier'
 
 

@@ -1,4 +1,5 @@
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -11,9 +12,10 @@ import {
   Legend,
   LabelList,
 } from "recharts";
+import "./classifier.css";
 
 function Classifier() {
-  const [formValues, setFormValues] = useState({ text: "" });
+  const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" });
   const [label, setLabel] = useState(-1);
   const [chartData, setChartData] = useState([
     { category: "ODS 6", probability: 0 },
@@ -43,10 +45,14 @@ function Classifier() {
     setFormValues({ ...formValues, text: e.target.value });
   };
 
+  const handleSelectChange = (e) => {
+    setFormValues({ ...formValues, algorithm: e.target.value });
+  };
+
   const sendText = () => {
     if (formValues.text.length !== 0) {
       handlePost();
-      console.log("Se realiza el envio :D");
+      console.log(formValues);
     } else {
       alert("No ha ingresado ningun texto!!!");
     }
@@ -57,24 +63,80 @@ function Classifier() {
   const returnLabel = () => {
     if (label === 6) {
       return (
-        <p>
-          El texto ingresado se alinea con el ODS 6. Agua limpia y saneamiento
-        </p>
+        <div>
+          <Row>
+            <p>
+              El texto ingresado se alinea con el{" "}
+              <b className="text-wrap bg-6 rounded-2">
+                ODS 6. Agua limpia y saneamiento
+              </b>
+            </p>
+          </Row>
+          <Row className="text-center">
+            <a href="https://www.un.org/sustainabledevelopment/es/water-and-sanitation/">
+              <img
+                className="img-fluid rounded"
+                alt="ODS 6. Agua limpia y saneamiento"
+                src="https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-06.png?itok=GELGcmKf"
+              />
+            </a>
+          </Row>
+        </div>
       );
     } else if (label === 7) {
       return (
-        <p>
-          El texto ingresado se alinea con el ODS 7. Energía Asequible y no
-          contaminante{" "}
-        </p>
+        <div>
+          <Row>
+            <p>
+              El texto ingresado se alinea con el{" "}
+              <b className="text-wrap bg-7 rounded-2">
+                ODS 7. Energía Asequible y no contaminante
+              </b>{" "}
+            </p>
+          </Row>
+          <Row className="text-center">
+            <a href="https://www.un.org/sustainabledevelopment/es/energy/">
+              <img
+                className="img-fluid rounded"
+                alt="ODS 7. Energía asequible y no contaminante"
+                src="https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-07.png?itok=0xptJrFs"
+              />
+            </a>
+          </Row>
+        </div>
       );
     } else if (label === 16) {
       return (
-        <p>
-          El texto ingresado se alinea con el ODS 16. Paz, justicia e
-          instituciones sólidas
-        </p>
+        <div>
+          <Row>
+            <p>
+              El texto ingresado se alinea con el{" "}
+              <b className="text-wrap bg-16 rounded-2">
+                ODS 16. Paz, justicia e instituciones sólidas
+              </b>
+            </p>
+          </Row>
+          <Row className="text-center">
+            <a href="https://www.un.org/sustainabledevelopment/es/peace-justice/">
+              <img
+                className="img-fluid rounded"
+                alt="ODS 16. Paz, justicia e instituciones solidas"
+                src="https://www.unicef.org/sites/default/files/styles/crop_thumbnail/public/S-WEB-Goal-16.png?itok=zRRLXl8t"
+              />
+            </a>
+          </Row>
+        </div>
       );
+    }
+  };
+
+  const containerBg = () => {
+    if (label === 6) {
+      return "bg-6 rounded-3 text-white";
+    } else if (label === 7) {
+      return "bg-7 rounded-3 text-white";
+    } else if (label === 16) {
+      return "bg-16 rounded-3 text-white";
     }
   };
 
@@ -82,6 +144,10 @@ function Classifier() {
     <>
       <Container style={{ paddingTop: "10px", paddingBottom: "10px" }}>
         <h2>Ingrese su texto a clasificar</h2>
+        <Form.Text muted>
+          Ingresa tu texto en aquí y haz click en clasificar para poder ver con
+          que ODS se alinea
+        </Form.Text>
         <Form.Group style={{ paddingTop: "10px", paddingBottom: "10px" }}>
           <Form.Control
             as="textarea"
@@ -90,16 +156,33 @@ function Classifier() {
             rows={8}
           />
         </Form.Group>
-        <Button
-          style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
-          onClick={sendText}
-        >
-          Clasificar
-        </Button>
+        <Form.Group>
+          <h3>Tipo de clasificador:</h3>
+          <Form.Select
+            value={formValues.algorithm}
+            onChange={handleSelectChange}
+          >
+            <option value="cnb">Complement Naive Bayes</option>
+            <option value="sdg">SVM</option>
+            <option value="rfc">Random Forest</option>
+          </Form.Select>
+        </Form.Group>
+        <p></p>
+        <div className="text-center">
+          <Button
+            style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
+            onClick={sendText}
+          >
+            Clasificar
+          </Button>
+        </div>
       </Container>
       {label !== -1 && (
         <>
-          <Container style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+          <Container
+            className={containerBg()}
+            style={{ paddingTop: "10px", paddingBottom: "10px" }}
+          >
             <h2>Resultado de la clasificación</h2>
             {returnLabel()}
           </Container>
@@ -124,5 +207,4 @@ function Classifier() {
     </>
   );
 }
-
 export default Classifier;
