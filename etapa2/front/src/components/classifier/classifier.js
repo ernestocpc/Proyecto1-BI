@@ -202,13 +202,16 @@ function Classifier() {
           onClick={sendText}
           className="margin-bottom"
         >
-          Clasificar
+          Clasificar texto
         </Button>
       </Container>
 
       <Container>
         <Form.Group>
           <h2>Clasificador de archivo</h2>
+          <Form.Text muted>
+          Adjunta un archivo para clasificar varios textos a la vez. Separalos con ";" para poder distinguirlos.
+        </Form.Text>
           <p></p>
           <Form.Control type="file" onChange={handleFileChange} />
         </Form.Group>
