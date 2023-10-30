@@ -22,6 +22,7 @@ function Classifier() {
 
   const URL = "http://127.0.0.1:8000/predict";
   const URL_list = "http://127.0.0.1:8000/predict";
+
   async function handlePost() {
     const response = await fetch(URL, {
       method: "POST",
@@ -37,6 +38,17 @@ function Classifier() {
 
     setLabel(data.resultado);
   }
+
+  async function handleFilePost() {
+    const response = await fetch(URL_list, {
+      method: "POST",
+      body: JSON.stringify(formValues),
+      headers: { "Content-type": "application/json;charset=utf-8" },
+    }); 
+    // TODO: Ganarle a la asincronía
+  }
+
+
 
   const handleTextChange = (e) => {
     setFormValues({ ...formValues, text: e.target.value });
@@ -64,14 +76,9 @@ function Classifier() {
 
   const handleFileSubmit = async () => {
     if (formValues.file) {
-      const formData = new FormData();
-      formData.append("file", formValues.file);
-      const response = await fetch(URL_list, {
-        method: "POST",
-        body: formData,
-      });
-      // const data = await response.json();
-      // Process the response as needed, just like with text input
+      handleFilePost();
+      console.log(formValues);
+
     } else {
       alert("No file selected!");
     }
@@ -196,8 +203,6 @@ function Classifier() {
             rows={8}
           />
         </Form.Group>
-
-
         <p></p>
         <Button
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
@@ -218,7 +223,7 @@ function Classifier() {
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={handleFileSubmit}
         >
-          Submit CSV
+          Clasificar CSV
         </Button>
       </Container>
       {label !== -1 && (
