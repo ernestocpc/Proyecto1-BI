@@ -160,7 +160,7 @@ function Classifier() {
     <span>
       Estos representan 3 algoritmos diferentes disponibles para realizar la
       clasificacion. Se recomienda usar Naive Bayes que tiene la mayor
-      precision.
+      precision (experimental).
     </span>
   );
 
