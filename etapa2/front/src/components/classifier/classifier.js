@@ -10,6 +10,8 @@ import Tooltip from "rc-tooltip";
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Legend, LabelList } from "recharts";
 import "./classifier.css";
+import ClassList from "./classifierList";
+
 
 function Classifier() {
   const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" });
@@ -19,6 +21,7 @@ function Classifier() {
     { category: "ODS 7", probability: 0 },
     { category: "ODS 16", probability: 0 },
   ]);
+  const[labelList, setLabelList] = useState([{predict:6, prob6:1, prob7:0, prob16:0}])
 
   const URL = "http://127.0.0.1:8000/predict";
   const URL_list = "http://127.0.0.1:8000/predict-list";
@@ -255,6 +258,12 @@ function Classifier() {
             </BarChart>
           </Container>
         </>
+      )}
+      {LabelList.length !== 0 && (
+        <Container className='scrollable' style={{ paddingTop: "10px", paddingBottom: "10px"}}>
+          <h2>Resultado clasificador de archivos</h2>
+          <ClassList array={labelList}/>
+        </Container>
       )}
     </>
   );
