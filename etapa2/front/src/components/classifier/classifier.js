@@ -3,53 +3,18 @@ import Row from "react-bootstrap/Row"
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-<<<<<<< Updated upstream
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList } from 'recharts';
 
 import "./classifier.css"
-=======
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import "rc-tooltip/assets/bootstrap.css";
-import Tooltip from "rc-tooltip";
-import ClassList from "./class_list";
->>>>>>> Stashed changes
 
 
 function Classifier() {
-<<<<<<< Updated upstream
     const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" })
     const [label, setLabel] = useState(-1)
     const [chartData, setChartData] = useState([
         { category: 'ODS 6', probability: 0 },
         { category: 'ODS 7', probability: 0 },
         { category: 'ODS 16', probability: 0 },
-=======
-  const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" });
-  const [label, setLabel] = useState(-1);
-  const [chartData, setChartData] = useState([
-    { category: "ODS 6", probability: 0 },
-    { category: "ODS 7", probability: 0 },
-    { category: "ODS 16", probability: 0 },
-  ]);
-
-  const[labelList, setLabelList] = useState([{predict:6, prob6:1, prob7:0, prob16:0}])
-
-  const URL = "http://127.0.0.1:8000/predict";
-  const URL_list = "http://127.0.0.1:8000/predict";
-
-  async function handlePost() {
-    const response = await fetch(URL, {
-      method: "POST",
-      body: JSON.stringify(formValues),
-      headers: { "Content-type": "application/json;charset=utf-8" },
-    });
-    const data = await response.json();
-    setChartData([
-      { category: "ODS 6", probability: data.probabilidades[6] || 0 },
-      { category: "ODS 7", probability: data.probabilidades[7] || 0 },
-      { category: "ODS 16", probability: data.probabilidades[16] || 0 },
->>>>>>> Stashed changes
     ]);
 
 
@@ -72,31 +37,8 @@ function Classifier() {
         setLabel(data.resultado)
     }
 
-<<<<<<< Updated upstream
     const handleTextChange = (e) => {
         setFormValues({ ...formValues, text: e.target.value })
-=======
-  const formatPercentage = (value) => `${(value * 100).toFixed(2)}%`;
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFormValues({ ...formValues, file: selectedFile });
-  };
-
-  const handleFileSubmit = async () => {
-    if (formValues.file) {
-      const formData = new FormData();
-      formData.append("file", formValues.file);
-      const response = await fetch(URL_list, {
-        method: "POST",
-        body: formData,
-      });
-      // const data = await response.json();
-      // Process the response as needed, just like with text input
-      // setLabelList(data)
-    } else {
-      alert("No file selected!");
->>>>>>> Stashed changes
     }
 
     const handleSelectChange = (e) => {
@@ -198,23 +140,7 @@ function Classifier() {
 
             )}
         </>
-<<<<<<< Updated upstream
     )
-=======
-      )}
-      {(labelList.length !==0) && (
-        <>
-          <Container className='scrollable' style={{ paddingTop: "10px", paddingBottom: "10px"}}>
-            <h2>Resultado clasificador de archivos</h2>
-            <ClassList array={labelList}/>
-          </Container>
-        </>
-      )
-
-      }
-    </>
-  );
->>>>>>> Stashed changes
 }
 
 
