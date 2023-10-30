@@ -21,7 +21,7 @@ function Classifier() {
   ]);
 
   const URL = "http://127.0.0.1:8000/predict";
-  const URL_list = "http://127.0.0.1:8000/predict";
+  const URL_list = "http://127.0.0.1:8000/predict-list";
   async function handlePost() {
     const response = await fetch(URL, {
       method: "POST",
@@ -167,9 +167,9 @@ function Classifier() {
   return (
     <>
       <Container style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-      <Form.Group>
+      <Form.Group className="margin-bottom">
           <div className="form-group-header">
-            <h2>Algoritmo de clasificación:</h2>
+            <h2 className="margin-right">Algoritmo de clasificación:</h2>
             <Tooltip placement="right" overlay={renderTooltip}>
               <FontAwesomeIcon icon={faCircleInfo} />
             </Tooltip>
@@ -197,11 +197,10 @@ function Classifier() {
           />
         </Form.Group>
 
-
-        <p></p>
         <Button
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={sendText}
+          className="margin-bottom"
         >
           Clasificar
         </Button>
@@ -209,7 +208,7 @@ function Classifier() {
 
       <Container>
         <Form.Group>
-          <h1>Clasificador de archivo</h1>
+          <h2>Clasificador de archivo</h2>
           <p></p>
           <Form.Control type="file" onChange={handleFileChange} />
         </Form.Group>
@@ -218,7 +217,7 @@ function Classifier() {
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={handleFileSubmit}
         >
-          Submit CSV
+          Clasificar CSV
         </Button>
       </Container>
       {label !== -1 && (

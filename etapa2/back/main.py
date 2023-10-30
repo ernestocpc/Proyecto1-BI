@@ -76,6 +76,22 @@ def make_predictions(dataModel: DataModel):
         f.write(f'{id};{datetime.now().strftime("%Y-%m-%d %H:%M:%S")};{algoritmo};{texto};{result}\n')
     return jsonResultadoYProbabilidades
 
+@app.post("/predict-list")
+def make_predictions_list(dataModel: DataModel):
+    # recieved_data = {text: '', algorithm: '', file: File}
+    print(dataModel.dict())
+    file = dataModel.dict()['file']
+    df = pd.read_csv(file.file)
+
+    # se llama a la funcion make_predictions para cada texto
+    resultados = []
+    for texto in df['Textos_espanol']:
+        dataModel.text = texto
+        resultados.append(make_predictions(dataModel))   
+     
+
+
+
 @app.get("/log")
 def get_log():
     log = []
