@@ -21,19 +21,16 @@ function Classifier() {
     { category: "ODS 7", probability: 0 },
     { category: "ODS 16", probability: 0 },
   ]);
-  const[labelList, setLabelList] = useState([{resultado:6, probabilidades:{
-    '6':1,
-    '7':0,
-    '16':0
-  }}])
+  const[labelList, setLabelList] = useState([]);
 
   const URL = "http://127.0.0.1:8000/predict";
   const URL_list = "http://127.0.0.1:8000/predict-list";
   async function handlePost() {
-    
+    const newFormValues = {text: formValues.text, algorithm: formValues.algorithm, data: []};
+
     const response = await fetch(URL, {
       method: "POST",
-      body: JSON.stringify(formValues),
+      body: JSON.stringify(newFormValues),
       headers: { "Content-type": "application/json;charset=utf-8" },
     });
     const data = await response.json();
@@ -54,6 +51,8 @@ function Classifier() {
       body: JSON.stringify(formValues),
       headers: { "Content-type": "application/json;charset=utf-8" },
     }); 
+    const data = await response.json();
+    setLabelList(data);
     // TODO: Ganarle a la asincronía
   }
 
@@ -259,6 +258,7 @@ function Classifier() {
         <Button
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={handleFileSubmit}
+          className="margin-bottom"
         >
           Clasificar CSV
         </Button>
@@ -290,7 +290,7 @@ function Classifier() {
           </Container>
         </>
       )}
-      {LabelList.length !== 0 && (
+      {labelList.length !== 0 && (
         <Container className='scrollable' style={{ paddingTop: "10px", paddingBottom: "10px"}}>
           <h2>Resultado clasificador de archivos</h2>
           <ClassList array={labelList}/>

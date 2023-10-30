@@ -5,7 +5,6 @@ function ClassList(props) {
 
     const array = props.array
 
-
     return (
         <Table className='text-center'>
         <thead className='thead-dark'>
@@ -19,13 +18,13 @@ function ClassList(props) {
         </thead>
         <tbody>
             {array.map((u,i)=>(
-                <tr>
+                <tr key={i}>
 
                     <td>{i+1}</td>
                     <td>{u.resultado}</td>
-                    <td>{(u.probabilidades['6'] * 100).toString() +'%'}</td>
-                    <td>{(u.probabilidades['7'] * 100).toString()+'%'}</td>
-                    <td>{(u.probabilidades['16'] * 100).toString()+'%'}</td>
+                    <td>{(u.probabilidades['6'] * 100).toFixed(2)}%</td>
+                    <td>{(u.probabilidades['7'] * 100).toFixed(2)}%</td>
+                    <td>{(u.probabilidades['16'] * 100).toFixed(2)}%</td>
                 </tr>
             ))}
         </tbody>
