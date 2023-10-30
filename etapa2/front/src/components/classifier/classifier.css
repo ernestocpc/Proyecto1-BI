@@ -23,3 +23,13 @@ svg{
 .bg-16{
     background-color: #9D3400
 }
+
+.form-group-header {
+    display: flex;
+    align-items: center; /* Align the children vertically */
+  }
+  
+  .form-group-header h3 {
+    margin-right: 10px; /* Add space to the right of the <h3> element */
+  }
+  

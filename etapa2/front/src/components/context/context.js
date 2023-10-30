@@ -67,6 +67,16 @@ function Context(){
                     </p>
                 </Row>
             </Container>
+            <Container className='Gcontainer'>
+                <h3>Fuentes:</h3>
+                <ul>
+                    <li>El Tiempo. (14 de Septiembre de 2023). <a href='https://www.eltiempo.com/economia/sectores/promigas-como-esta-el-acceso-a-la-energia-y-al-gas-de-las-personas-en-colombia-805756#:~:text=Colombia%20tiene%20una%20de%20las,natural%2C%20seg%C3%BAn%20an%C3%A1lisis%20de%20Promigas'>El Tiempo Sectores. Obtenido de En Colombia, 9,6 millones de personas están sin acceso a energía ni a gas </a></li>
+                    <li>La Republica. (24 de Marzo de 2023). <a href='https://www.larepublica.co/economia/en-el-colombia-3-2-millones-de-personas-no-tienen-acceso-al-servicio-de-agua-potable-3576736#:~:text=Cabe%20resaltar%20que%20en%20Colombia,incrementa%20en%20el%20sector%20rural'>La Republica. Obtenido de En el Colombia, 3,2 millones de personas no tienen acceso al servicio de agua potable</a></li>
+                    <li>MINVIVIENDA. (24 de Agosto de 2021). <a href='https://www.minvivienda.gov.co/sala-de-prensa/colombia-potencia-en-agua-el-93-de-los-colombianos-ya-cuentan-con-acceso-este-servicio'>Ministerio de Vivienda de Colombia. Obtenido de Colombia potencia en agua: El 93% de los colombianos ya cuentan con acceso a este servicio</a></li>
+                    <li>​UNDP. (2023). <a href='https://www.undp.org/es/sustainable-development-goals#:~:text=de%20Desarrollo%20Sostenible%3F-,Los%20Objetivos%20de%20Desarrollo%20Sostenible%20(ODS)%2C%20tambi%C3%A9n%20conocidos%20como,disfruten%20de%20paz%20y%20prosperidad'>UNDP. Obtenido de ¿Qué son los Objetivos de desarrollo sostenible.</a></li>
+                    <li>​UNFPA. (s.f.). UNFPA . <a href='https://colombia.unfpa.org/es/unfpa-en-colombia'>Obtenido de UNFPA en Colombia</a></li>
+                </ul>
+            </Container>
         </div>
     )
 }
