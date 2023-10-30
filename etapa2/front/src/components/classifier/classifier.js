@@ -21,7 +21,7 @@ function Classifier() {
   ]);
 
   const URL = "http://127.0.0.1:8000/predict";
-
+  const URL_list = "http://127.0.0.1:8000/predict";
   async function handlePost() {
     const response = await fetch(URL, {
       method: "POST",
@@ -56,6 +56,26 @@ function Classifier() {
   };
 
   const formatPercentage = (value) => `${(value * 100).toFixed(2)}%`;
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFormValues({ ...formValues, file: selectedFile });
+  };
+
+  const handleFileSubmit = async () => {
+    if (formValues.file) {
+      const formData = new FormData();
+      formData.append("file", formValues.file);
+      const response = await fetch(URL_list, {
+        method: "POST",
+        body: formData,
+      });
+      // const data = await response.json();
+      // Process the response as needed, just like with text input
+    } else {
+      alert("No file selected!");
+    }
+  };
 
   const returnLabel = () => {
     if (label === 6) {
@@ -136,27 +156,20 @@ function Classifier() {
       return "bg-16 rounded-3 text-white";
     }
   };
-  const renderTooltip = <span>Estos representan 3 algoritmos diferentes disponibles para realizar la clasificacion. Se recomienda usar Naive Bayes que tiene la mayor precision.</span>;
+  const renderTooltip = (
+    <span>
+      Estos representan 3 algoritmos diferentes disponibles para realizar la
+      clasificacion. Se recomienda usar Naive Bayes que tiene la mayor
+      precision.
+    </span>
+  );
 
   return (
     <>
       <Container style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-        <h2>Ingrese su texto a clasificar</h2>
-        <Form.Text muted>
-          Ingresa tu texto en aquí y haz click en clasificar para poder ver con
-          que ODS se alinea
-        </Form.Text>
-        <Form.Group style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-          <Form.Control
-            as="textarea"
-            onChange={handleTextChange}
-            value={formValues.text}
-            rows={8}
-          />
-        </Form.Group>
-        <Form.Group>
+      <Form.Group>
           <div className="form-group-header">
-            <h3>Tipo de clasificador:</h3>
+            <h2>Algoritmo de clasificación:</h2>
             <Tooltip placement="right" overlay={renderTooltip}>
               <FontAwesomeIcon icon={faCircleInfo} />
             </Tooltip>
@@ -170,16 +183,43 @@ function Classifier() {
             <option value="rfc">Random Forest</option>
           </Form.Select>
         </Form.Group>
+        <h2>Ingrese su texto a clasificar</h2>
+        <Form.Text muted>
+          Ingresa tu texto en aquí y haz click en clasificar para poder ver con
+          que ODS se alinea
+        </Form.Text>
+        <Form.Group style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+          <Form.Control
+            as="textarea"
+            onChange={handleTextChange}
+            value={formValues.text}
+            rows={8}
+          />
+        </Form.Group>
+
+
         <p></p>
-        <div className="text-center">
-          <Button
-            style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
-            onClick={sendText}
-            
-          >
-            Clasificar
-          </Button>
-        </div>
+        <Button
+          style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
+          onClick={sendText}
+        >
+          Clasificar
+        </Button>
+      </Container>
+
+      <Container>
+        <Form.Group>
+          <h1>Clasificador de archivo</h1>
+          <p></p>
+          <Form.Control type="file" onChange={handleFileChange} />
+        </Form.Group>
+        <p></p>
+        <Button
+          style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
+          onClick={handleFileSubmit}
+        >
+          Submit CSV
+        </Button>
       </Container>
       {label !== -1 && (
         <>
