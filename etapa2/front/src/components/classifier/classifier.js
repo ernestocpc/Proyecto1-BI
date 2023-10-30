@@ -6,9 +6,8 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import "rc-tooltip/assets/bootstrap.css";
-import Tooltip from "rc-tooltip";
-import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, Legend, LabelList } from "recharts";
+import RcTooltip  from "rc-tooltip";
+import { BarChart, Bar, XAxis, YAxis, Legend, LabelList, Tooltip } from "recharts";
 import "./classifier.css";
 import ClassList from "./classifierList";
 
@@ -209,9 +208,9 @@ function Classifier() {
       <Form.Group className="margin-bottom">
           <div className="form-group-header">
             <h2 className="margin-right">Algoritmo de clasificación:</h2>
-            <Tooltip placement="right" overlay={renderTooltip}>
+            <RcTooltip  placement="right" overlay={renderTooltip}>
               <FontAwesomeIcon icon={faCircleInfo} />
-            </Tooltip>
+            </RcTooltip >
           </div>
           <Form.Select
             value={formValues.algorithm}
@@ -277,7 +276,7 @@ function Classifier() {
             <BarChart width={500} height={300} data={chartData}>
               <XAxis dataKey="category" />
               <YAxis tickFormatter={formatPercentage} />
-
+              <Tooltip />
               <Legend />
               <Bar dataKey="probability" fill="#8884d8">
                 <LabelList
