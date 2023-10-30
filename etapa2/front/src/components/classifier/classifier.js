@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import "rc-tooltip/assets/bootstrap.css";
 import Tooltip from "rc-tooltip";
-
+import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Legend, LabelList } from "recharts";
 import "./classifier.css";
 
@@ -21,9 +21,10 @@ function Classifier() {
   ]);
 
   const URL = "http://127.0.0.1:8000/predict";
-  const URL_list = "http://127.0.0.1:8000/predict";
+  const URL_list = "http://127.0.0.1:8000/predict-list";
 
   async function handlePost() {
+    
     const response = await fetch(URL, {
       method: "POST",
       body: JSON.stringify(formValues),
@@ -40,11 +41,12 @@ function Classifier() {
   }
 
   async function handleFilePost() {
-    const response = await fetch(URL_list, {
-      method: "POST",
-      body: JSON.stringify(formValues),
-      headers: { "Content-type": "application/json;charset=utf-8" },
-    }); 
+    axios.post(URL_list, formValues.file, )
+    // const response = await fetch(URL_list, {
+    //   method: "POST",
+    //   body: JSON.stringify(formValues),
+    //   headers: { "Content-type": "application/json;charset=utf-8" },
+    // }); 
     // TODO: Ganarle a la asincronía
   }
 
@@ -77,7 +79,7 @@ function Classifier() {
   const handleFileSubmit = async () => {
     if (formValues.file) {
       handleFilePost();
-      console.log(formValues);
+      console.log(formValues.file);
 
     } else {
       alert("No file selected!");
@@ -190,7 +192,7 @@ function Classifier() {
             <option value="rfc">Random Forest</option>
           </Form.Select>
         </Form.Group>
-        <h2>Ingrese su texto a clasificar</h2>
+        <h2 style={{ paddingTop: "1rem"}}>Ingrese su texto a clasificar</h2>
         <Form.Text muted>
           Ingresa tu texto en aquí y haz click en clasificar para poder ver con
           que ODS se alinea
@@ -215,6 +217,7 @@ function Classifier() {
       <Container>
         <Form.Group>
           <h1>Clasificador de archivo</h1>
+          <strong>Aclaracion de formato de envio:</strong>
           <p></p>
           <Form.Control type="file" onChange={handleFileChange} />
         </Form.Group>
