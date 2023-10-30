@@ -21,7 +21,11 @@ function Classifier() {
     { category: "ODS 7", probability: 0 },
     { category: "ODS 16", probability: 0 },
   ]);
-  const[labelList, setLabelList] = useState([{predict:6, prob6:1, prob7:0, prob16:0}])
+  const[labelList, setLabelList] = useState([{resultado:6, probabilidades:{
+    '6':1,
+    '7':0,
+    '16':0
+  }}])
 
   const URL = "http://127.0.0.1:8000/predict";
   const URL_list = "http://127.0.0.1:8000/predict-list";
