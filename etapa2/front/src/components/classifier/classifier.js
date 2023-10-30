@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -40,12 +40,13 @@ function Classifier() {
   }
 
   async function handleFilePost() {
-    axios.post(URL_list, formValues.file, )
-    // const response = await fetch(URL_list, {
-    //   method: "POST",
-    //   body: JSON.stringify(formValues),
-    //   headers: { "Content-type": "application/json;charset=utf-8" },
-    // }); 
+
+    console.log(formValues);
+    const response = await fetch(URL_list, {
+      method: "POST",
+      body: JSON.stringify(formValues),
+      headers: { "Content-type": "application/json;charset=utf-8" },
+    }); 
     // TODO: Ganarle a la asincronía
   }
 
@@ -62,7 +63,6 @@ function Classifier() {
   const sendText = () => {
     if (formValues.text.length !== 0) {
       handlePost();
-      console.log(formValues);
     } else {
       alert("No ha ingresado ningun texto!!!");
     }
@@ -75,15 +75,40 @@ function Classifier() {
     setFormValues({ ...formValues, file: selectedFile });
   };
 
-  const handleFileSubmit = async () => {
+  const handleFileSubmit = () => {
     if (formValues.file) {
-      handleFilePost();
-      console.log(formValues.file);
-
+      const reader = new FileReader();
+      reader.readAsText(formValues.file);
+  
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const lines = text.split(";");
+        const data = [];
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const row = line.split(",");
+          data.push(row);
+        }
+  
+        // Use a temporary variable for the updated state
+        const updatedFormValues = { ...formValues, data: data };
+  
+        // Update the state and trigger the post request in a useEffect
+        setFormValues(updatedFormValues);
+      };
     } else {
       alert("No file selected!");
     }
   };
+  
+  useEffect(() => {
+    if (formValues.data) {
+      handleFilePost();
+    }
+  }, [formValues.data]);
+  
+  // Rest of your component code...
+  
 
   const returnLabel = () => {
     if (label === 6) {
