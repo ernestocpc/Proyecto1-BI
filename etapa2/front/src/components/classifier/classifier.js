@@ -38,6 +38,17 @@ function Classifier() {
     setLabel(data.resultado);
   }
 
+  async function handleFilePost() {
+    const response = await fetch(URL_list, {
+      method: "POST",
+      body: JSON.stringify(formValues),
+      headers: { "Content-type": "application/json;charset=utf-8" },
+    }); 
+    // TODO: Ganarle a la asincronía
+  }
+
+
+
   const handleTextChange = (e) => {
     setFormValues({ ...formValues, text: e.target.value });
   };
@@ -64,14 +75,9 @@ function Classifier() {
 
   const handleFileSubmit = async () => {
     if (formValues.file) {
-      const formData = new FormData();
-      formData.append("file", formValues.file);
-      const response = await fetch(URL_list, {
-        method: "POST",
-        body: formData,
-      });
-      // const data = await response.json();
-      // Process the response as needed, just like with text input
+      handleFilePost();
+      console.log(formValues);
+
     } else {
       alert("No file selected!");
     }

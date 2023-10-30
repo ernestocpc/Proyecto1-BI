@@ -77,8 +77,10 @@ def make_predictions(dataModel: DataModel):
     return jsonResultadoYProbabilidades
 
 @app.post("/predict-list")
-def make_predictions_list(dataModel: DataModel):
+async def make_predictions_list(dataModel: DataModel):
     # recieved_data = {text: '', algorithm: '', file: File}
+    with open(f"uploaded_{dataModel.file.filename}", "wb") as buffer:
+        print(dataModel.file.file)
     print(dataModel.dict())
     file = dataModel.dict()['file']
     df = pd.read_csv(file.file)
