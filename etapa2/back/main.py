@@ -78,20 +78,14 @@ def make_predictions(dataModel: DataModel):
 
 @app.post("/predict-list")
 def make_predictions_list(dataModel: DataModel):
-    # recieved_data = {text: '', algorithm: '', file: File}
-    algoritmo = dataModel.dict()['algorithm']
-    file = dataModel.dict()['file']
-    df = pd.read_csv(file.file)
-
-    # se llama a la funcion make_predictions para cada texto
+    textos = dataModel.dict()['data']
     resultados = []
-    for texto in df['Textos_espanol']:
-        dataModel.text = texto
+    for texto in textos:
+        dataModel.text = texto[0]
         resultados.append(make_predictions(dataModel))   
+    print(resultados)
+    return resultados
      
-
-
-
 @app.get("/log")
 def get_log():
     log = []
