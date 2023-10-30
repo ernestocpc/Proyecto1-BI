@@ -76,6 +76,16 @@ def make_predictions(dataModel: DataModel):
         f.write(f'{id};{datetime.now().strftime("%Y-%m-%d %H:%M:%S")};{algoritmo};{texto};{result}\n')
     return jsonResultadoYProbabilidades
 
+@app.post("/predict-list")
+def make_predictions_list(dataModel: DataModel):
+    textos = dataModel.dict()['data']
+    resultados = []
+    for texto in textos:
+        dataModel.text = texto[0]
+        resultados.append(make_predictions(dataModel))   
+    print(resultados)
+    return resultados
+     
 @app.get("/log")
 def get_log():
     log = []

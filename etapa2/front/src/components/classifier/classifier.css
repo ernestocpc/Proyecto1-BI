@@ -24,6 +24,14 @@ svg{
     background-color: #9D3400
 }
 
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.margin-right {
+    margin-right: 0.5rem;
+}
+
 .form-group-header {
     display: flex;
     align-items: center; /* Align the children vertically */

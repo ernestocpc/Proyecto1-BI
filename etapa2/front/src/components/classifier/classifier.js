@@ -10,6 +10,8 @@ import Tooltip from "rc-tooltip";
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Legend, LabelList } from "recharts";
 import "./classifier.css";
+import ClassList from "./classifierList";
+
 
 function Classifier() {
   const [formValues, setFormValues] = useState({ text: "", algorithm: "cnb" });
@@ -19,15 +21,16 @@ function Classifier() {
     { category: "ODS 7", probability: 0 },
     { category: "ODS 16", probability: 0 },
   ]);
+  const[labelList, setLabelList] = useState([]);
 
   const URL = "http://127.0.0.1:8000/predict";
   const URL_list = "http://127.0.0.1:8000/predict-list";
-
   async function handlePost() {
-    
+    const newFormValues = {text: formValues.text, algorithm: formValues.algorithm, data: []};
+
     const response = await fetch(URL, {
       method: "POST",
-      body: JSON.stringify(formValues),
+      body: JSON.stringify(newFormValues),
       headers: { "Content-type": "application/json;charset=utf-8" },
     });
     const data = await response.json();
@@ -48,6 +51,8 @@ function Classifier() {
       body: JSON.stringify(formValues),
       headers: { "Content-type": "application/json;charset=utf-8" },
     }); 
+    const data = await response.json();
+    setLabelList(data);
     // TODO: Ganarle a la asincronía
   }
 
@@ -194,16 +199,16 @@ function Classifier() {
     <span>
       Estos representan 3 algoritmos diferentes disponibles para realizar la
       clasificacion. Se recomienda usar Naive Bayes que tiene la mayor
-      precision.
+      precision (experimental).
     </span>
   );
 
   return (
     <>
       <Container style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-      <Form.Group>
+      <Form.Group className="margin-bottom">
           <div className="form-group-header">
-            <h2>Algoritmo de clasificación:</h2>
+            <h2 className="margin-right">Algoritmo de clasificación:</h2>
             <Tooltip placement="right" overlay={renderTooltip}>
               <FontAwesomeIcon icon={faCircleInfo} />
             </Tooltip>
@@ -230,19 +235,22 @@ function Classifier() {
             rows={8}
           />
         </Form.Group>
-        <p></p>
+
         <Button
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={sendText}
+          className="margin-bottom"
         >
-          Clasificar
+          Clasificar texto
         </Button>
       </Container>
 
       <Container>
         <Form.Group>
-          <h1>Clasificador de archivo</h1>
-          <strong>Aclaracion de formato de envio:</strong>
+          <h2>Clasificador de archivo</h2>
+          <Form.Text muted>
+          Adjunta un archivo para clasificar varios textos a la vez. Separalos con ";" para poder distinguirlos.
+        </Form.Text>
           <p></p>
           <Form.Control type="file" onChange={handleFileChange} />
         </Form.Group>
@@ -250,6 +258,7 @@ function Classifier() {
         <Button
           style={{ backgroundColor: "#E08145", borderColor: "#E08145" }}
           onClick={handleFileSubmit}
+          className="margin-bottom"
         >
           Clasificar CSV
         </Button>
@@ -280,6 +289,12 @@ function Classifier() {
             </BarChart>
           </Container>
         </>
+      )}
+      {labelList.length !== 0 && (
+        <Container className='scrollable' style={{ paddingTop: "10px", paddingBottom: "10px"}}>
+          <h2>Resultado clasificador de archivos</h2>
+          <ClassList array={labelList}/>
+        </Container>
       )}
     </>
   );
